@@ -4,7 +4,8 @@ import pygame
 
 from settings_alien_invasion import Settings
 from space_invadors_game.ships.human_ship import HumanShip
-from bullet.bullet import Bullet
+from space_invadors_game.bullet.bullet import Bullet
+from space_invadors_game.aliens.aliens import Alien
 
 
 class AlienInvasion:
@@ -21,13 +22,22 @@ class AlienInvasion:
 
         self.ship = HumanShip(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
 
+    def _create_fleet(self) -> None:
+        """Creating a fleet of aliens"""
+        # Create one alien
+        alien = Alien(self.screen)
+        self.aliens.add(alien)
+
     def _check_events(self):
-        # """Checking for the mous and keys actions"""
+        # """Checking for the mouse and keys actions"""
 
         for event in pygame.event.get():
 
@@ -73,6 +83,8 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+
+        self.aliens.draw(self.screen)
 
         # Show last printed display
         pygame.display.flip()
