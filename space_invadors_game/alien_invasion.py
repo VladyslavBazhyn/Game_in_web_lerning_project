@@ -33,7 +33,7 @@ class AlienInvasion:
     def _create_fleet(self) -> None:
         """Creating a fleet of aliens"""
         # Create one alien
-        alien = Alien(self.screen)
+        alien = Alien(self)
         self.aliens.add(alien)
 
     def _check_events(self):
