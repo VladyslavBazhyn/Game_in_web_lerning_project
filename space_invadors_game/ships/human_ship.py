@@ -15,7 +15,7 @@ class HumanShip:
             "./images/ship.png"
         )
         self.image = pygame.transform.scale(image, (60, 60))  # Set desired width and height
-
+        # self.image = pygame.image.load("./images/ship.png")
         self.rect = self.image.get_rect()
 
         # Create ship at the middle of the display
