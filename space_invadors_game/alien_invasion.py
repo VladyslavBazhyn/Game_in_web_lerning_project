@@ -97,14 +97,31 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
-    def update_bullets(self) -> None:
+    def _update_bullets(self) -> None:
         """Update bullet position and remove old bullets"""
         self.bullets.update()
         # Update bullets position
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-            # print(len(self.bullets))
+
+        self._check_bullet_alien_collisions()
+
+    def _check_bullet_alien_collisions(self) -> None:
+        """Reaction on shooting aliens by bullets"""
+        # Delete all bullets and aliens which collided
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
+
+        if not self.aliens:
+            print("All aliens destroyed! Creating a new fleet...")
+            self.bullets.empty()
+            self.aliens.empty()
+            # pygame.time.delay(1000)
+            # self.settings.alien_speed += 0.1
+            # self.settings.fleet_drop_speed += 5
+            self._create_fleet()
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
@@ -117,13 +134,33 @@ class AlienInvasion:
         # Show last printed display
         pygame.display.flip()
 
+    def _update_aliens(self) -> None:
+        """Check whether fleet situated on edge,
+        then renovate position of all aliens in fleet"""
+        self._check_fleet_edges()
+        self.aliens.update()
+
+    def _check_fleet_edges(self) -> None:
+        """Acting according to whether some of the aliens achieve screen edge"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self) -> None:
+        """Move down all fleet and change his direction"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= (-1)
+
     def run_game(self) -> None:
         """Start main cycle of the game"""
         while True:
             self._check_events()
             self.ship.update()
             self.bullets.update()
-            self.update_bullets()
+            self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
 
