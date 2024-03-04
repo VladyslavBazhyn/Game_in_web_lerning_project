@@ -27,8 +27,8 @@ class AlienInvasion:
         self._create_fleet()
 
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        # self.settings.screen_width = self.screen.get_rect().width
+        # self.settings.screen_height = self.screen.get_rect().height
 
     def _create_alien(
             self,
@@ -118,10 +118,15 @@ class AlienInvasion:
             print("All aliens destroyed! Creating a new fleet...")
             self.bullets.empty()
             self.aliens.empty()
+            # print(self.settings.alien_speed, "|",  self.settings.fleet_drop_speed)
             # pygame.time.delay(1000)
             # self.settings.alien_speed += 0.1
             # self.settings.fleet_drop_speed += 5
             self._create_fleet()
+            # print(self.settings.alien_speed, "|",  self.settings.fleet_drop_speed)
+            # for alien in self.aliens:
+            #     print(alien.alien_speed, "|", alien.fleet_drop_speed)
+
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
