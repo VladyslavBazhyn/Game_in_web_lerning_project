@@ -27,6 +27,11 @@ class HumanShip:
 
         self.settings = ai_game.settings
 
+    def center_ship(self) -> None:
+        """Set ship on center of the screen"""
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
+
     def update(self):
         """
         Update current position base on
