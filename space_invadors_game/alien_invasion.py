@@ -9,6 +9,7 @@ from space_invadors_game.ships.human_ship import HumanShip
 from space_invadors_game.bullet.bullet import Bullet
 from space_invadors_game.aliens.aliens import Alien
 from button import Button
+from scoreboard import Scoreboard
 
 
 class AlienInvasion:
@@ -36,6 +37,9 @@ class AlienInvasion:
 
         # Create Play button
         self.play_button = Button(self, "Play")
+
+        # Crete instance of imagine of game statistic and scoreboard on screen
+        self.sb = Scoreboard(self)
 
     def _ship_hit(self):
         """React on collision of alien ship with human ship"""
@@ -125,6 +129,7 @@ class AlienInvasion:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score()
 
             # Delete existing aliens and bullet
             self.aliens.empty()
@@ -176,6 +181,11 @@ class AlienInvasion:
             self.bullets, self.aliens, True, True
         )
 
+        if collisions:
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
+                self.sb.prep_score()
+
         if not self.aliens:
             print("All aliens destroyed! Creating a new fleet...")
             self.bullets.empty()
@@ -189,6 +199,9 @@ class AlienInvasion:
             bullet.draw_bullet()
 
         self.aliens.draw(self.screen)
+
+        # Draw information about score
+        self.sb.show_score()
 
         # Draw Play button, if game inactive
         if not self.stats.game_active:

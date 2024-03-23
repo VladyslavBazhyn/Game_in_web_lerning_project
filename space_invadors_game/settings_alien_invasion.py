@@ -22,6 +22,10 @@ class Settings:
 
         # Parameter for speed increasing
         self.speedup_scale = 1.1
+
+        # How fast increase alien price
+        self.score_scale = 1.5
+
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self) -> None:
@@ -33,8 +37,13 @@ class Settings:
         # fleet_direction 1 mean way of moving right; -1 left
         self.fleet_direction = 1
 
+        # Taking score
+        self.alien_points = 50
+
     def increase_speed(self) -> None:
-        """Increasing of speed parameters"""
+        """Increasing of speed parameters and alin price"""
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
