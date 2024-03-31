@@ -1,12 +1,14 @@
 import pygame
+from pygame.sprite import Sprite
 
 
-class HumanShip:
-    """Class for caring of HumanShip"""
+class HumanShip(Sprite):
+    """Initialise ship and set his start place"""
     def __init__(
             self,
             ai_game: any
     ) -> None:
+        super().__init__()
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
 

@@ -44,8 +44,9 @@ class AlienInvasion:
     def _ship_hit(self):
         """React on collision of alien ship with human ship"""
         if self.stats.ships_left > 0:
-            # Decrease ships_left
+            # Decrease ships_left and renew scoreboard
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
 
             # Delete surplus of aliens and bullets
             self.aliens.empty()
@@ -130,6 +131,8 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
+            self.sb.prep_ships()
 
             # Delete existing aliens and bullet
             self.aliens.empty()
@@ -184,13 +187,18 @@ class AlienInvasion:
         if collisions:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
-                self.sb.prep_score()
+            self.sb.prep_score()
+            self.sb.check_high_score()
 
         if not self.aliens:
             print("All aliens destroyed! Creating a new fleet...")
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            # Increase level
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
