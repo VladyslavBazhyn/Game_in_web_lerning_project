@@ -13,9 +13,10 @@ class Alien(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
 
+        # Alien Health
+        self.health = 1
+
         # Load the alien image and set its rect attribute.
-        # image = pygame.image.load("./images/alien-ship.png")
-        # self.image = pygame.transform.scale(image, (25, 100))
         self.image = pygame.image.load("./images/alien-ship.png")
         self.rect = self.image.get_rect()
 
@@ -39,3 +40,6 @@ class Alien(Sprite):
         screen_rect = self.screen.get_rect()
         if self.rect.right >= screen_rect.right or self.rect.left <= 0:
             return True
+
+    def increase_health(self, amount: int) -> None:
+        self.health += amount

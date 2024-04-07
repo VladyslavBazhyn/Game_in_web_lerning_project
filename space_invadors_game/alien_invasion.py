@@ -28,12 +28,12 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
 
+        self.stats = GameStats(self)
         self._create_fleet()
 
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
         # Create instance for saving game statistic
-        self.stats = GameStats(self)
 
         # Create Play button
         self.play_button = Button(self, "Play")
@@ -72,7 +72,6 @@ class AlienInvasion:
                 self._ship_hit()
                 break
 
-
     def _create_alien(
             self,
             alien_number: int,
@@ -80,6 +79,8 @@ class AlienInvasion:
     ) -> None:
         """Create an oen alien and place him in row"""
         alien = Alien(self)
+        if self.stats.level % 5 == 0:
+            alien.increase_health(self.stats.level // 5)
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 4 * alien_width * alien_number
         alien.rect.x = alien.x
@@ -181,11 +182,15 @@ class AlienInvasion:
         """Reaction on shooting aliens by bullets"""
         # Delete all bullets and aliens which collided
         collisions = pygame.sprite.groupcollide(
-            self.bullets, self.aliens, True, True
+            self.bullets, self.aliens, True, False
         )
 
         if collisions:
             for aliens in collisions.values():
+                for alien in aliens:
+                    alien.health -= 1
+                    if alien.health <= 0:
+                        self.aliens.remove(alien)
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
             self.sb.check_high_score()
