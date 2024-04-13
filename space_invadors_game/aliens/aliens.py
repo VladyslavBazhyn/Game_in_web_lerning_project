@@ -4,9 +4,10 @@ from pygame.sprite import Sprite
 
 class Alien(Sprite):
     """Class alien which create one alien from aliens fleet"""
+
     def __init__(
-        self,
-        ai_game: any
+            self,
+            ai_game: any
     ) -> None:
         """Initialise alien and set his start position"""
         super().__init__()
@@ -17,7 +18,8 @@ class Alien(Sprite):
         self.health = 1
 
         # Load the alien image and set its rect attribute.
-        self.image = pygame.image.load("./images/alien-ship.png")
+        self.image_road = "./images/alien-ship.png"
+        self.image = pygame.image.load(self.image_road)
         self.rect = self.image.get_rect()
 
         # Start each new alien near the top left of the screen
@@ -43,3 +45,15 @@ class Alien(Sprite):
 
     def increase_health(self, amount: int) -> None:
         self.health += amount
+
+    def image_change(self) -> None:
+        if self.image_road == "./images/alien-ship.png":
+            self.image_road = "./images/level_2.png"
+        elif self.image_road == "./images/level_2.png":
+            self.image_road = "./images/level_3.png"
+        elif self.image_road == "./images/level_3.png":
+            self.image_road = "./images/level_4.png"
+        elif self.image_road == "./images/level_4.png":
+            self.image_road = "./images/level_5.png"
+
+        self.image = pygame.image.load(self.image_road)

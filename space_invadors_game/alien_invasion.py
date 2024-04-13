@@ -81,6 +81,7 @@ class AlienInvasion:
         alien = Alien(self)
         if self.stats.level % 5 == 0:
             alien.increase_health(self.stats.level // 5)
+            alien.image_change()
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 4 * alien_width * alien_number
         alien.rect.x = alien.x

@@ -12,16 +12,18 @@ class Settings:
         self.ship_limit = 1
 
         # Setting for a bullet
-        self.bullet_width = 3000
-        self.bullet_height = 15
+        self.bullet_width = 10
+        self.bullet_height = 10
         self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 3
 
         # Settings for an aliens
-        self.fleet_drop_speed = 10
+        self.fleet_drop_speed = 12
 
         # Parameter for speed increasing
-        self.speedup_scale = 1.1
+        self.alien_speedup_scale = 1.1
+        self.ship_speedup_scale = 1.05
+        self.bullet_speedup_scale = 1.03
 
         # How fast increase alien price
         self.score_scale = 1.5
@@ -30,9 +32,9 @@ class Settings:
 
     def initialize_dynamic_settings(self) -> None:
         """Initializing of changeable parameters"""
-        self.ship_speed = 1.5
-        self.bullet_speed = 3.0
-        self.alien_speed = 0.2
+        self.ship_speed = 1.25
+        self.bullet_speed = 1.5
+        self.alien_speed = 0.25
 
         # fleet_direction 1 mean way of moving right; -1 left
         self.fleet_direction = 1
@@ -42,8 +44,8 @@ class Settings:
 
     def increase_speed(self) -> None:
         """Increasing of speed parameters and alin price"""
-        self.ship_speed *= self.speedup_scale
-        self.bullet_speed *= self.speedup_scale
-        self.alien_speed *= self.speedup_scale
+        self.ship_speed *= self.ship_speedup_scale
+        self.bullet_speed *= self.bullet_speedup_scale
+        self.alien_speed *= self.alien_speedup_scale
 
         self.alien_points = int(self.alien_points * self.score_scale)
