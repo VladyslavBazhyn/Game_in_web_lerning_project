@@ -13,17 +13,17 @@ class Settings:
 
         # Setting for a bullet
         self.bullet_width = 10
-        self.bullet_height = 10
+        self.bullet_height = 15
         self.bullet_color = (60, 60, 60)
-        self.bullets_allowed = 3
+        self.bullets_allowed = 5
 
         # Settings for an aliens
         self.fleet_drop_speed = 12
 
         # Parameter for speed increasing
-        self.alien_speedup_scale = 1.1
+        self.alien_speedup_scale = 1.05
         self.ship_speedup_scale = 1.05
-        self.bullet_speedup_scale = 1.03
+        self.bullet_speedup_scale = 1.05
 
         # How fast increase alien price
         self.score_scale = 1.5
@@ -34,7 +34,7 @@ class Settings:
         """Initializing of changeable parameters"""
         self.ship_speed = 1.25
         self.bullet_speed = 1.5
-        self.alien_speed = 0.25
+        self.alien_speed = 0.2
 
         # fleet_direction 1 mean way of moving right; -1 left
         self.fleet_direction = 1

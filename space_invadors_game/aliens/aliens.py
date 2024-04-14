@@ -42,18 +42,18 @@ class Alien(Sprite):
         screen_rect = self.screen.get_rect()
         if self.rect.right >= screen_rect.right or self.rect.left <= 0:
             return True
-
-    def increase_health(self, amount: int) -> None:
-        self.health += amount
-
-    def image_change(self) -> None:
-        if self.image_road == "./images/alien-ship.png":
-            self.image_road = "./images/level_2.png"
-        elif self.image_road == "./images/level_2.png":
-            self.image_road = "./images/level_3.png"
-        elif self.image_road == "./images/level_3.png":
-            self.image_road = "./images/level_4.png"
-        elif self.image_road == "./images/level_4.png":
-            self.image_road = "./images/level_5.png"
-
-        self.image = pygame.image.load(self.image_road)
+    #
+    # def increase_health(self, amount: int) -> None:
+    #     self.health += amount
+    #
+    # def image_change(self) -> None:
+    #     if self.image_road == "./images/alien-ship.png":
+    #         self.image_road = "./images/level_2.png"
+    #     elif self.image_road == "./images/level_2.png":
+    #         self.image_road = "./images/level_3.png"
+    #     elif self.image_road == "./images/level_3.png":
+    #         self.image_road = "./images/level_4.png"
+    #     elif self.image_road == "./images/level_4.png":
+    #         self.image_road = "./images/level_5.png"
+    #
+    #     self.image = pygame.image.load(self.image_road)
