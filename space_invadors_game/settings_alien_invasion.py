@@ -34,7 +34,7 @@ class Settings:
         """Initializing of changeable parameters"""
         self.ship_speed = 1.25
         self.bullet_speed = 1.5
-        self.alien_speed = 0.2
+        self.alien_speed = 0.15
 
         # fleet_direction 1 mean way of moving right; -1 left
         self.fleet_direction = 1

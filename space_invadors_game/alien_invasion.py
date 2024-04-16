@@ -80,17 +80,16 @@ class AlienInvasion:
         """Create an oen alien and place him in row"""
         alien = Alien(self)
 
-        if self.stats.level > 3:
-            alien.health += 1
+        if self.stats.level > 2:
             alien.image = pygame.image.load("./images/level_2.png")
-        if self.stats.level > 6:
-            alien.health += 2
+        if self.stats.level > 4:
+            alien.health += 1
             alien.image = pygame.image.load("./images/level_3.png")
-        if self.stats.level > 9:
-            alien.health += 3
+        if self.stats.level > 6:
+            alien.health += 1
             alien.image = pygame.image.load("./images/level_4.png")
-        if self.stats.level > 15:
-            alien.health += 3
+        if self.stats.level > 8:
+            alien.health += 1
             alien.image = pygame.image.load("./images/level_5.png")
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 4 * alien_width * alien_number
