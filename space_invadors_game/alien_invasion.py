@@ -41,6 +41,13 @@ class AlienInvasion:
         # Crete instance of imagine of game statistic and scoreboard on screen
         self.sb = Scoreboard(self)
 
+        # Set background image
+        self.background = pygame.image.load("./images/background_level_2.png")
+
+    def background_space(self, image) -> None:
+        size = pygame.transform.scale(image, (1370, 780))
+        self.screen.blit(size, (0, 0))
+
     def _ship_hit(self):
         """React on collision of alien ship with human ship"""
         if self.stats.ships_left > 0:
@@ -217,6 +224,7 @@ class AlienInvasion:
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
+        self.background_space(self.background)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
@@ -258,7 +266,11 @@ class AlienInvasion:
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= (-1)
 
+    def _set_icon(self) -> None:
+        pygame.display.set_icon(self.background)
+
     def run_game(self) -> None:
+        self._set_icon()
         """Start main cycle of the game"""
         while True:
             self._check_events()
@@ -272,4 +284,5 @@ class AlienInvasion:
 
 if __name__ == "__main__":
     ai = AlienInvasion()
+    ai._set_icon()
     ai.run_game()
