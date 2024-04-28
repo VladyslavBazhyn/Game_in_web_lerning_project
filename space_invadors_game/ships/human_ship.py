@@ -13,15 +13,15 @@ class HumanShip(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # Set the image of the ship
-        image = pygame.image.load(
-            "./images/ship.png"
-        )
-        self.image = pygame.transform.scale(image, (60, 60))  # Set desired width and height
-        # self.image = pygame.image.load("./images/ship.png")
+        # image = pygame.image.load(
+        #     "./images/ship_2.png"
+        # )
+        # self.image = pygame.transform.scale(image, (60, 60))  # Set desired width and height
+        self.image = pygame.image.load("./images/ship_2.png")
         self.rect = self.image.get_rect()
 
         # Create ship at the middle of the display
-        self.rect.midbottom = self.screen_rect.midbottom
+        self.rect.midbottom = (self.screen_rect.midbottom[0], self.screen_rect.midbottom[1] - 25)
         self.x = float(self.rect.x)
 
         self.moving_right = False
@@ -31,7 +31,7 @@ class HumanShip(Sprite):
 
     def center_ship(self) -> None:
         """Set ship on center of the screen"""
-        self.rect.midbottom = self.screen_rect.midbottom
+        self.rect.midbottom = (self.screen_rect.midbottom[0], self.screen_rect.midbottom[1] - 25)
         self.x = float(self.rect.x)
 
     def update(self):

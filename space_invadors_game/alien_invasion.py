@@ -42,7 +42,7 @@ class AlienInvasion:
         self.sb = Scoreboard(self)
 
         # Set background image
-        self.background = pygame.image.load("./images/background_level_2.png")
+        self.background = pygame.image.load("./images/background_level_2_1.bmp")
 
     def background_space(self, image) -> None:
         size = pygame.transform.scale(image, (1370, 780))
@@ -223,8 +223,8 @@ class AlienInvasion:
             self.sb.prep_level()
 
     def _update_screen(self):
-        self.screen.fill(self.settings.bg_color)
-        self.background_space(self.background)
+        # self.background_space(self.background)
+        self.screen.fill(0)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
@@ -270,7 +270,6 @@ class AlienInvasion:
         pygame.display.set_icon(self.background)
 
     def run_game(self) -> None:
-        self._set_icon()
         """Start main cycle of the game"""
         while True:
             self._check_events()
